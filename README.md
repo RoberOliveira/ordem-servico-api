@@ -34,7 +34,7 @@ Antes de executar o projeto, certifique-se de que você tem os seguintes softwar
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [URL_DO_SEU_REPOSITORIO]
+    git clone https://github.com/RoberOliveira/ordem-servico-api.git
     cd ordem-servico-api
     ```
 
