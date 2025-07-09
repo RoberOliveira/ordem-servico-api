@@ -1,27 +1,30 @@
 package br.edu.ifpr.foz.ordem_servico_api.models;
 
-import java.time.LocalDate;
-
-import jakarta.annotation.Generated;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comentario {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private Long id;
     private String descricao;
-
-    private LocalDate dataEnvio;
-
+    private LocalDateTime dataEnvio;
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "ordem_servico_id")
     private OrdemServico ordemServico;
+
+    @PrePersist
+    public void prePersist() {
+        this.dataEnvio = LocalDateTime.now();
+    }
 }

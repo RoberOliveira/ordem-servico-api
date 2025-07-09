@@ -1,11 +1,12 @@
 package br.edu.ifpr.foz.ordem_servico_api.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import br.edu.ifpr.foz.ordem_servico_api.models.OrdemServico;
 
-@Repository
-public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Integer> {
-    
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long> {
+
+    List<OrdemServico> findByClienteEmail(String email);
 }

@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+		"name": "API de Ordens de Serviço - Web III",
+		"description": "Coleção para testar a API de Gestão de Ordens de Serviço, desenvolvida na disciplina de Desenvolvimento Web III.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ordens de Serviço",
+			"item": [
+				{
+					"name": "1. Criar Ordem de Serviço",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Formatação de notebook com backup\",\n    \"preco\": 180.0,\n    \"cliente\": {\n        \"nome\": \"Ana Paula\",\n        \"email\": \"ana.paula@example.com\",\n        \"telefone\": \"45912345678\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ordens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ordens"
+							]
+						},
+						"description": "Cria uma nova ordem de serviço associada a um cliente. Se o cliente não existir (baseado no e-mail), um novo cliente é criado."
+					},
+					"response": []
+				},
+				{
+					"name": "2. Listar Todas as Ordens",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ordens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ordens"
+							]
+						},
+						"description": "Retorna uma lista com todas as ordens de serviço cadastradas."
+					},
+					"response": []
+				},
+				{
+					"name": "3. Listar Ordens por E-mail do Cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ordens?email=ana.paula@example.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ordens"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ana.paula@example.com"
+								}
+							]
+						},
+						"description": "Retorna uma lista de ordens de serviço filtradas pelo e-mail do cliente."
+					},
+					"response": []
+				},
+				{
+					"name": "4. Adicionar Comentário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Serviço concluído, aguardando retirada pelo cliente.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ordens/1/comentarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ordens",
+								"1",
+								"comentarios"
+							]
+						},
+						"description": "Adiciona um novo comentário a uma ordem de serviço existente. Lembre-se de substituir o '1' na URL pelo ID de uma ordem válida."
+					},
+					"response": []
+				},
+				{
+					"name": "5. Finalizar Ordem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ordens/1/finalizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ordens",
+								"1",
+								"finalizar"
+							]
+						},
+						"description": "Altera o status de uma ordem de serviço para 'FINALIZADA'. Lembre-se de substituir o '1' na URL pelo ID de uma ordem com status 'ABERTA'."
+					},
+					"response": []
+				},
+				{
+					"name": "6. Cancelar Ordem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ordens/2/cancelar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ordens",
+								"2",
+								"cancelar"
+							]
+						},
+						"description": "Altera o status de uma ordem de serviço para 'CANCELADA'. Lembre-se de substituir o '2' na URL pelo ID de uma ordem com status 'ABERTA'."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints relacionados à gestão de Ordens de Serviço."
+		}
+	]
+}

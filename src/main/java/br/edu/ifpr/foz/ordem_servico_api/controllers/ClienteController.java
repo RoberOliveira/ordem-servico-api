@@ -1,26 +1,27 @@
 package br.edu.ifpr.foz.ordem_servico_api.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import br.edu.ifpr.foz.ordem_servico_api.models.Cliente;
-import br.edu.ifpr.foz.ordem_servico_api.services.ClienteService;
+import br.edu.ifpr.foz.ordem_servico_api.repositories.ClienteRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
+@RequiredArgsConstructor
 public class ClienteController {
+    private final ClienteRepository clienteRepository;
 
-    @Autowired
-    ClienteService clienteService;
+    @PostMapping
+    public ResponseEntity<Cliente> criar(@RequestBody Cliente cliente) {
+        Cliente salvo = clienteRepository.save(cliente);
+        return ResponseEntity.status(201).body(salvo);
+    }
 
     @GetMapping
-    public List<Cliente> findAll(){
-        
-        return clienteService.findAll();
-
+    public ResponseEntity<List<Cliente>> listar() {
+        return ResponseEntity.ok(clienteRepository.findAll());
     }
 }
